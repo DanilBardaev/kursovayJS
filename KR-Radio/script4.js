@@ -26,20 +26,20 @@ button.addEventListener('click', async function() {                     //Доб
     alert(`В стране "${strana_str}" нет радиостанций\nИли \nВы ввели число. `);        //Если значение maxClickCountStation равно null, то выводится сообщение об отсутствии радиостанций в указанной стране
   }
 }
-  catch (error) {                                                   //В случае возникновения ошибки выводится сообщение об ошибке загрузки данных
+  catch (error) {                                    //В случае возникновения ошибки выводится сообщение об ошибке загрузки данных
     console.error(error);                             //для перехвата ошибок при выполнении запроса к API.
     alert(`Ошибка загрузки данных.`);
   }
 });
 
-async function krData(strana_str) {                                 //Объявление ассинхроной функции krData, которая получает данные о радиостанциях в определенной стране с помощью api fetch и возвращает объект station.
+async function krData(strana_str) {      //Объявление ассинхроной функции krData, которая получает данные о радиостанциях в определенной стране с помощью api fetch и возвращает объект station.
   const response = await fetch(`http://de1.api.radio-browser.info/json/stations/bycountry/${strana_str}`);
-  const station = await response.json();                               //Полученные данные преобразуются в формат JSON и возвращаются из функции (37,38)
+  const station = await response.json();      //Полученные данные преобразуются в формат JSON и возвращаются из функции (37,38)
   return station;
   
 }
 
-function MaxClickCount(data) {                                  //Создание функции MaxClickCount, которая принимает объект station и возвращает объект радиостанции с наибольшим количеством кликов.
+function MaxClickCount(data) {  //Создание функции MaxClickCount, которая принимает объект station и возвращает объект радиостанции с наибольшим количеством кликов.
   let maxClickCount = 0;
   let maxClickCountStation = null;
   for (const station of data) {
@@ -47,12 +47,12 @@ function MaxClickCount(data) {                                  //Создани
       maxClickCount = station.clickcount;
       maxClickCountStation = station;
     }
-  }                                                       //Возвращение найденной радиостанции в виде объекта. Если радиостанция не имеет кликов, возвращение null
+  }                 //Возвращение найденной радиостанции в виде объекта. Если радиостанция не имеет кликов, возвращение null
   return maxClickCountStation;
 }
 
-krData("").then((data) => {
-  console.log(data);
+krData("").then((station) => {
+  console.log(station);
 })
 console.log(krData("Russian"));
 
